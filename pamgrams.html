@@ -11,7 +11,7 @@
 
 <meta name="author" content="Mara Averick" />
 
-<meta name="date" content="2017-05-06" />
+<meta name="date" content="2017-05-07" />
 
 <title>Pamgrans and Bipams</title>
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Pamgrans and Bipams</h1>
 <h4 class="author"><em>Mara Averick</em></h4>
-<h4 class="date"><em>2017-05-06</em></h4>
+<h4 class="date"><em>2017-05-07</em></h4>
 
 </div>
 
@@ -128,29 +128,632 @@ $(document).ready(function () {
 library(tidyverse)
 library(tidytext)
 library(here)</code></pre>
-<p>Let’s read in the Pam-bigram data.</p>
+<p>Let’s read in the Pam-bigram data (which you can access for your own amusement <a href="https://gist.github.com/batpigandme/7fd3266451392d0310ebefd0bc472c0f">here</a>).</p>
 <pre class="r"><code>## read csv file
 pam_bigrams &lt;- read_csv(&quot;data/pam_bigrams.csv&quot;)</code></pre>
 <p>Now we’ll use the <code>sample_n()</code> function from <code>dplyr</code> to get 15 (though you could use any number) observations/rows from our pamgram data. Note that the <code>freq</code> variable contains the number of times a given bigram occurred in the “PAM” corpus (which, as of this writing, includes all of Archer, seasons 1 - 7).</p>
 <pre class="r"><code>sample_n(pam_bigrams, 15)</code></pre>
 <pre><code>## # A tibble: 15 × 3
-##              bigram  freq speaker
-##               &lt;chr&gt; &lt;int&gt;   &lt;chr&gt;
-## 1    cocaine puddin     3     PAM
-## 2        fire drill     1     PAM
-## 3      dick holster     1     PAM
-## 4     party krieger     1     PAM
-## 5        ow goddamn     2     PAM
-## 6          pay bums     1     PAM
-## 7        gal's love     1     PAM
-## 8     dance partner     1     PAM
-## 9     black mexican     1     PAM
-## 10     skinny bitch     1     PAM
-## 11 insurance policy     1     PAM
-## 12         wee baby     2     PAM
-## 13  holy shitsnacks    15     PAM
-## 14      truck noise     1     PAM
-## 15     homemade gin     1     PAM</code></pre>
+##            bigram  freq speaker
+##             &lt;chr&gt; &lt;int&gt;   &lt;chr&gt;
+## 1   pretty ironic     1     PAM
+## 2     grrgh grrgh     1     PAM
+## 3        cyril ya     1     PAM
+## 4    whats lana's     1     PAM
+## 5  izzat innernet     1     PAM
+## 6     sharknoid 4     1     PAM
+## 7  hollywood gala     1     PAM
+## 8    vampires ate     1     PAM
+## 9   call cherlene     1     PAM
+## 10        hoh lee     1     PAM
+## 11   racist story     1     PAM
+## 12    dagoes kill     1     PAM
+## 13     mm cocaine     1     PAM
+## 14      ol vagina     1     PAM
+## 15      ms archer     8     PAM</code></pre>
+<div id="tables-of-pam" class="section level2">
+<h2>Tables of Pam</h2>
+<p>Since pretty much every pair of words Pam utters is priceless, let’s check out some of the different ways you can display data frames as <a href="http://rmarkdown.rstudio.com/lesson-7.html">tables in R Markdown</a>.</p>
+<div id="kable" class="section level3">
+<h3><code>kable</code></h3>
+<p>First, we might as well make use of the <code>knitr::kable</code> function, since we’re knitting this document anyhow. Note that the chunk option <code>results='asis'</code> needs to be set so that our output isn’t further processed by knitr when we pull our document together.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<pre class="r"><code>library(knitr)
+kable(sample_n(pam_bigrams, 15), caption = &quot;kable pamgrams&quot;)</code></pre>
+<table>
+<caption>kable pamgrams</caption>
+<thead>
+<tr class="header">
+<th align="left">bigram</th>
+<th align="right">freq</th>
+<th align="left">speaker</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">arigato fellas</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">masturbate til</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">sour milk</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">yakov smirnoff</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">hypocrite cooze</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">yeah dude</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">mandatory meeting</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">drugstore half</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">pffrrfft prrfft</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">isis agent</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">frickin brake</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">dude oww</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">gotta figure</td>
+<td align="right">2</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">archer jealous</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">kinda scary</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+</tbody>
+</table>
+<p>Ok, we’ve got bold headers, and lines between rows – basically, things are looking a little more <em>table-y</em> than the did before. The <a href="https://www.rdocumentation.org/packages/knitr/versions/1.15.1/topics/kable"><code>kable()</code></a> function can take other formatting arguments, but we’re just gonna leave it at the defaults here.</p>
+</div>
+<div id="pander" class="section level3">
+<h3><code>pander</code></h3>
+<p><a href="#pander"><code>pander</code></a> is another R Pandoc writer. It supports <a href="https://rapporter.github.io/pander/#markdown-tables">four Pandoc formats</a> for tables (which can be specified using <code>pandoc.table</code><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>), and you may or may not want to add some information about that in your frontmatter/YAML. You can also make more adjustments to your table formatting using <a href="https://rapporter.github.io/pander/#pander-options"><code>panderOptions()</code></a>.</p>
+<pre class="r"><code>library(pander)
+## multiline table by default
+pandoc.table(sample_n(pam_bigrams, 5))</code></pre>
+<pre><code>## 
+## --------------------------------
+##     bigram       freq   speaker 
+## --------------- ------ ---------
+##    pizza guy      1       PAM   
+## 
+## flavor enhancer   1       PAM   
+## 
+##   light takes     1       PAM   
+## 
+##    care wait      1       PAM   
+## 
+##     hai mm        1       PAM   
+## --------------------------------</code></pre>
+<pre class="r"><code>## simple tables
+pandoc.table(sample_n(pam_bigrams, 5), style = &quot;simple&quot;)</code></pre>
+<pre><code>## 
+## 
+##      bigram       freq   speaker 
+## ---------------- ------ ---------
+##  nutsacks wanna    1       PAM   
+##    blow jobs       1       PAM   
+##     told ya        2       PAM   
+## hollywood honcho   1       PAM   
+##   cousins wow      1       PAM</code></pre>
+<pre class="r"><code>## grid tables
+pandoc.table(sample_n(pam_bigrams, 5), style = &quot;grid&quot;)</code></pre>
+<pre><code>## 
+## 
+## +-------------------+--------+-----------+
+## |      bigram       |  freq  |  speaker  |
+## +===================+========+===========+
+## |  maximum voltage  |   1    |    PAM    |
+## +-------------------+--------+-----------+
+## | thousand divided  |   1    |    PAM    |
+## +-------------------+--------+-----------+
+## | penis ensmallment |   1    |    PAM    |
+## +-------------------+--------+-----------+
+## |    easy spirit    |   1    |    PAM    |
+## +-------------------+--------+-----------+
+## |   brake line's    |   1    |    PAM    |
+## +-------------------+--------+-----------+</code></pre>
+<pre class="r"><code>## rmarkdown tables (aka pipe table format)
+pandoc.table(sample_n(pam_bigrams, 5), style = &quot;rmarkdown&quot;)</code></pre>
+<pre><code>## 
+## 
+## |      bigram       |  freq  |  speaker  |
+## |:-----------------:|:------:|:---------:|
+## |    brain chips    |   1    |    PAM    |
+## |  name's furlock   |   1    |    PAM    |
+## | telephone ringing |   1    |    PAM    |
+## |     krieg ow      |   1    |    PAM    |
+## |    robocop pro    |   1    |    PAM    |</code></pre>
+<p>There are a bunch of other options you can play around with as well, such as <a href="https://rapporter.github.io/pander/#caption">captions</a>, <a href="https://rapporter.github.io/pander/#highlight-cells">cell highlighting</a>, <a href="https://rapporter.github.io/pander/#cell-alignment">cell alignment</a>, and <a href="https://rapporter.github.io/pander/#table-and-cell-width">width</a>.</p>
+</div>
+<div id="xtable" class="section level3">
+<h3><code>xtable</code></h3>
+<p>The <a href="http://crantastic.org/packages/xtable"><code>xtable</code></a> package has been around for a while, and it has a <em>ton</em> of formatting options for both LaTeX and HTML output. (Not to be confused with a <em>tonne</em> of options, which – how does one even measure formatting options in kilos?) The output defaults to latex, and, as with <code>kable</code>, we’ll need to be sure to include <code>results=&quot;asis&quot;</code> in our chunk options.</p>
+<pre class="r"><code>library(xtable)
+xpam &lt;- xtable(sample_n(pam_bigrams, 15))
+print(xpam, type=&quot;html&quot;)</code></pre>
+<!-- html table generated in R 3.4.0 by xtable 1.8-2 package -->
+<!-- Sun May  7 08:44:53 2017 -->
+<table border="1">
+<tr>
+<th>
+</th>
+<th>
+bigram
+</th>
+<th>
+freq
+</th>
+<th>
+speaker
+</th>
+</tr>
+<tr>
+<td align="right">
+1
+</td>
+<td>
+fawty shawty
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+2
+</td>
+<td>
+time friday
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+3
+</td>
+<td>
+totally confidential
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+4
+</td>
+<td>
+staff meeting
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+5
+</td>
+<td>
+ar randy
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+6
+</td>
+<td>
+improv huh
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+7
+</td>
+<td>
+gotta forfeit
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+8
+</td>
+<td>
+uniforms driving
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+9
+</td>
+<td>
+entire goddamn
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+10
+</td>
+<td>
+pam’s buying
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+11
+</td>
+<td>
+mole’s blood
+</td>
+<td align="right">
+2
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+12
+</td>
+<td>
+gotta figure
+</td>
+<td align="right">
+2
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+13
+</td>
+<td>
+triflin bitches
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+14
+</td>
+<td>
+commercial driver’s
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+<tr>
+<td align="right">
+15
+</td>
+<td>
+snaps kidnapper’s
+</td>
+<td align="right">
+1
+</td>
+<td>
+PAM
+</td>
+</tr>
+</table>
+<p>Yeah, so, the default doesn’t look so awesome right now. However, this is really just an HTML table, so it can be easily styled as such (in addition to using the <code>xtable</code> parameters).</p>
+</div>
+<div id="huxtable" class="section level3">
+<h3><code>huxtable</code></h3>
+<p>Like <code>xtable</code>, <a href="https://hughjonesd.github.io/huxtable/"><code>huxtable</code></a> deals in both LaTeX and HTML, and has a ton of <a href="https://hughjonesd.github.io/huxtable/huxtable.html">properties</a> you can adjust to your liking (you can even use the <code>magrittr</code>-style pipe operator, <code>%&gt;%</code>, to do so). The number format defaults to two decimal places, so we’ll set that manually here. In order for the column names to show up in your huxtable, they need to be added to the data frame itself. If you’re working in R Markdown, it <em>will</em> look like they show up twice, but that shouldn’t be the case once you’ve knit your document.</p>
+<pre class="r"><code>library(huxtable)
+hpam &lt;- hux(sample_n(pam_bigrams, 15)) %&gt;%
+  huxtable::add_colnames()
+number_format(hpam) &lt;- 0
+hpam</code></pre>
+<table class="huxtable" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto;">
+<col style="width: NA;"><col style="width: NA;"><col style="width: NA;"><tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">bigram</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">freq</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">speaker</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">scrooge mcduck</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">jesus jones</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">amazing driver</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">fricking head's</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">shitter's clogged</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">racist story</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">urinal cakes</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">nuts crazy</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">bees hang</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">kidding 36</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">spamela rubbing</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">balls taste</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">laughs duh</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">crooked cops</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">ball slappiney</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+</table>
+
+<p>Though it’s a bit clunky for such simple output, there are <a href="https://hughjonesd.github.io/huxtable/huxtable.html#more-formatting">more options</a>, such as conditional formatting, as well as some very fine-tuned controls that may make <code>huxtable</code> a good choice for you.</p>
+</div>
+<div id="printr" class="section level3">
+<h3><code>printr</code></h3>
+<p><a href="https://yihui.name">Yihui Xie</a>, the author of <code>knitr</code>, and a bevy of <a href="https://github.com/yihui/">other useful R packages</a> (including most of the ones ending in “-down”), also created the <a href="https://yihui.name/printr/"><code>printr</code></a> package as a “companion” to knitr. And, as far as data frames, tibbles, and the like go, the output will look the same as it does using <code>kable()</code> without <code>printr</code> attached. However, it <em>will</em> make a difference in terms of the way things like matrices, or lists of vignettes, and datasets are displayed.</p>
+<pre class="r"><code>library(printr)
+kable(sample_n(pam_bigrams, 15), caption = &quot;printr pamgrams&quot;)</code></pre>
+<table>
+<caption>printr pamgrams</caption>
+<thead>
+<tr class="header">
+<th align="left">bigram</th>
+<th align="right">freq</th>
+<th align="left">speaker</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">phuh phuh</td>
+<td align="right">3</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">rab hoagies</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">leavin yer</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">em thuy</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">lick bag</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">cocaine online</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">meant cut</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">stuff happened</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">sound greedy</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">sad trombone</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">thuds vomiting</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">ass beat</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">bigger question</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="even">
+<td align="left">de vil’s</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+<tr class="odd">
+<td align="left">goddamn brain</td>
+<td align="right">1</td>
+<td align="left">PAM</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>vignette(package = &quot;printr&quot;)</code></pre>
+<table>
+<caption>Vignettes in printr</caption>
+<thead>
+<tr class="header">
+<th align="left">Item</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">printr</td>
+<td align="left">An Introduction to the printr Package (source, html)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>See RStudio’s <a href="http://rmarkdown.rstudio.com/lesson-7.html">R Markdown – Tables</a> documentation for more on this.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>By default, it will use <a href="http://pandoc.org/MANUAL.html#multiline-tables"><code>mulitiline</code> format</a>, but there’s not much in the way of visuals for that with these bigrams.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
 
 
 

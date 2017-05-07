@@ -18,7 +18,7 @@ library(tidytext)
 library(here)
 ```
 
-Let's read in the Pam-bigram data.
+Let's read in the Pam-bigram data (which you can access for your own amusement [here](https://gist.github.com/batpigandme/7fd3266451392d0310ebefd0bc472c0f)).
 
 ```{r read pamgrams, message=FALSE}
 ## read csv file
@@ -31,3 +31,87 @@ Now we'll use the `sample_n()` function from `dplyr` to get 15 (though you could
 sample_n(pam_bigrams, 15)
 ```
 
+## Tables of Pam
+
+Since pretty much every pair of words Pam utters is priceless, let's check out some of the different ways you can display data frames as [tables in R Markdown](http://rmarkdown.rstudio.com/lesson-7.html). 
+
+### `kable`
+
+First, we might as well make use of the `knitr::kable` function, since we're knitting this document anyhow. Note that the chunk option `results='asis'` needs to be set so that our output isn't further processed by knitr when we pull our document together.[^1]
+
+```{r kable pam, results='asis'}
+library(knitr)
+kable(sample_n(pam_bigrams, 15), caption = "kable pamgrams")
+```
+
+Ok, we've got bold headers, and lines between rows -- basically, things are looking a little more _table-y_ than the did before. The [`kable()`](https://www.rdocumentation.org/packages/knitr/versions/1.15.1/topics/kable) function can take other formatting arguments, but we're just gonna leave it at the defaults here.
+
+### `pander`
+
+[`pander`] is another R Pandoc writer. It supports [four Pandoc formats](https://rapporter.github.io/pander/#markdown-tables) for tables (which can be specified using `pandoc.table`[^2]), and you may or may not want to add some information about that in your frontmatter/YAML. You can also make more adjustments to your table formatting using [`panderOptions()`](https://rapporter.github.io/pander/#pander-options). 
+
+```{r pandoc table default}
+library(pander)
+## multiline table by default
+pandoc.table(sample_n(pam_bigrams, 5))
+```
+```{r pandoc table simple}
+## simple tables
+pandoc.table(sample_n(pam_bigrams, 5), style = "simple")
+```
+
+```{r pandoc table grid}
+## grid tables
+pandoc.table(sample_n(pam_bigrams, 5), style = "grid")
+```
+
+```{r pandoc table rmarkdown}
+## rmarkdown tables (aka pipe table format)
+pandoc.table(sample_n(pam_bigrams, 5), style = "rmarkdown")
+```
+
+There are a bunch of other options you can play around with as well, such as [captions](https://rapporter.github.io/pander/#caption), [cell highlighting](https://rapporter.github.io/pander/#highlight-cells), [cell alignment](https://rapporter.github.io/pander/#cell-alignment), and [width](https://rapporter.github.io/pander/#table-and-cell-width).
+
+### `xtable`
+
+The [`xtable`](http://crantastic.org/packages/xtable) package has been around for a while, and it has a _ton_ of formatting options for both LaTeX and HTML output. (Not to be confused with a _tonne_ of options, which -- how does one even measure formatting options in kilos?) The output defaults to latex, and, as with `kable`, we'll need to be sure to include `results="asis"` in our chunk options.
+
+```{r xtable, results="asis"}
+library(xtable)
+xpam <- xtable(sample_n(pam_bigrams, 15))
+print(xpam, type="html")
+```
+
+Yeah, so, the default doesn't look so awesome right now. However, this is really just an HTML table, so it can be easily styled as such (in addition to using the `xtable` parameters).
+
+### `huxtable`
+
+Like `xtable`, [`huxtable`](https://hughjonesd.github.io/huxtable/) deals in both LaTeX and HTML, and has a ton of [properties](https://hughjonesd.github.io/huxtable/huxtable.html) you can adjust to your liking (you can even use the `magrittr`-style pipe operator, `%>%`, to do so). The number format defaults to two decimal places, so we'll set that manually here. In order for the column names to show up in your huxtable, they need to be added to the data frame itself. If you're working in R Markdown, it _will_ look like they show up twice, but that shouldn't be the case once you've knit your document.
+
+```{r huxtable, message=FALSE}
+library(huxtable)
+hpam <- hux(sample_n(pam_bigrams, 15)) %>%
+  huxtable::add_colnames()
+number_format(hpam) <- 0
+hpam
+```
+
+Though it's a bit clunky for such simple output, there are [more options](https://hughjonesd.github.io/huxtable/huxtable.html#more-formatting), such as conditional formatting, as well as some very fine-tuned controls that may make `huxtable` a good choice for you.
+
+### `printr`
+
+[Yihui Xie](https://yihui.name), the author of `knitr`, and a bevy of [other useful R packages](https://github.com/yihui/) (including most of the ones ending in "-down"), also created the [`printr`](https://yihui.name/printr/) package as a "companion" to knitr. And, as far as data frames, tibbles, and the like go, the output will look the same as it does using `kable()` without `printr` attached. However, it _will_ make a difference in terms of the way things like matrices, or lists of vignettes, and datasets are displayed.
+
+```{r printr pamgram}
+library(printr)
+kable(sample_n(pam_bigrams, 15), caption = "printr pamgrams")
+```
+
+```{r printr vignette}
+vignette(package = "printr")
+```
+
+
+
+[^1]: See RStudio's [R Markdown -- Tables](http://rmarkdown.rstudio.com/lesson-7.html) documentation for more on this.
+[^2]: By default, it will use [`mulitiline` format](http://pandoc.org/MANUAL.html#multiline-tables), but there's not much in the way of visuals for that with these bigrams.
