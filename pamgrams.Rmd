@@ -110,6 +110,10 @@ kable(sample_n(pam_bigrams, 15), caption = "printr pamgrams")
 ```{r printr vignette}
 vignette(package = "printr")
 ```
+---
+```{r sessioninfo}
+sessionInfo()
+```
 
 
 
