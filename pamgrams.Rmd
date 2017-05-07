@@ -33,7 +33,7 @@ sample_n(pam_bigrams, 15)
 
 ## Tables of Pam
 
-Since pretty much every pair of words Pam utters is priceless, let's check out some of the different ways you can display data frames as [tables in R Markdown](http://rmarkdown.rstudio.com/lesson-7.html). 
+Since pretty much every pair of words Pam utters is priceless, let's check out some of the different ways you can display data frames as [tables in R Markdown](http://rmarkdown.rstudio.com/lesson-7.html). If you're looking at this in markdown (`.md` file), what you see may not match the descriptions. This makes sense, and is worth paying attention to for things like GitHub's README.md files, and the like.
 
 ### `kable`
 

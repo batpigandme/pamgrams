@@ -31,26 +31,26 @@ sample_n(pam_bigrams, 15)
 ## # A tibble: 15 × 3
 ##               bigram  freq speaker
 ##                <chr> <int>   <chr>
-## 1          yeah blue     1     PAM
-## 2          hot asian     1     PAM
-## 3       frickin edie     1     PAM
-## 4    kill decepticon     1     PAM
-## 5           aw maaan     1     PAM
-## 6        crazy pants     1     PAM
-## 7  penis ensmallment     1     PAM
-## 8       fawty shawty     1     PAM
-## 9       whitey crane     1     PAM
-## 10        primo shit     1     PAM
-## 11 wiped reformatted     1     PAM
-## 12          moto san     1     PAM
-## 13           sold em     1     PAM
-## 14        ya krieger     1     PAM
-## 15      killing cops     1     PAM
+## 1      music tourist     1     PAM
+## 2         wanna chop     1     PAM
+## 3   frickin disaster     1     PAM
+## 4           nazi bob     1     PAM
+## 5          ekblad jr     1     PAM
+## 6   cooze inappropes     1     PAM
+## 7          sixty 280     1     PAM
+## 8         guys chill     1     PAM
+## 9    kill decepticon     1     PAM
+## 10       bionic legs     1     PAM
+## 11 stakeout supplies     1     PAM
+## 12 somebody's breath     1     PAM
+## 13      found lana's     1     PAM
+## 14      arms growing     1     PAM
+## 15  thousand dollars     1     PAM
 ```
 
 ## Tables of Pam
 
-Since pretty much every pair of words Pam utters is priceless, let's check out some of the different ways you can display data frames as [tables in R Markdown](http://rmarkdown.rstudio.com/lesson-7.html). 
+Since pretty much every pair of words Pam utters is priceless, let's check out some of the different ways you can display data frames as [tables in R Markdown](http://rmarkdown.rstudio.com/lesson-7.html). If you're looking at this in markdown (`.md` file), what you see may not match the descriptions. This makes sense, and is worth paying attention to for things like GitHub's README.md files, and the like.
 
 ### `kable`
 
@@ -66,23 +66,23 @@ kable(sample_n(pam_bigrams, 15), caption = "kable pamgrams")
 
 Table: kable pamgrams
 
-bigram             freq  speaker 
-----------------  -----  --------
-maximum voltage       1  PAM     
-buck fifty            1  PAM     
-meal snacks           1  PAM     
-fister roboto         1  PAM     
-dial tone             1  PAM     
-murder mystery        1  PAM     
-wooden stakes         1  PAM     
-god lana              1  PAM     
-skinny ass            2  PAM     
-cliburn knock         1  PAM     
-easy spirit           1  PAM     
-peak oil              1  PAM     
-stayin alive          1  PAM     
-black guys            1  PAM     
-real bank             1  PAM     
+bigram               freq  speaker 
+------------------  -----  --------
+frickin nightmare       1  PAM     
+cap'n crunch            1  PAM     
+story neck              1  PAM     
+literally murder        1  PAM     
+damn table              1  PAM     
+mule kicked             1  PAM     
+wait college            1  PAM     
+ginger savings          1  PAM     
+brain chips             1  PAM     
+wooden stakes           1  PAM     
+psst lana               1  PAM     
+super drunk             1  PAM     
+wanna fresh             1  PAM     
+pffrrfft prrfft         1  PAM     
+panties untwisted       1  PAM     
 
 Ok, we've got bold headers, and lines between rows -- basically, things are looking a little more _table-y_ than the did before. The [`kable()`](https://www.rdocumentation.org/packages/knitr/versions/1.15.1/topics/kable) function can take other formatting arguments, but we're just gonna leave it at the defaults here.
 
@@ -99,19 +99,19 @@ pandoc.table(sample_n(pam_bigrams, 5))
 
 ```
 ## 
-## ------------------------------------
-##       bigram         freq   speaker 
-## ------------------- ------ ---------
-## commercial driver's   1       PAM   
+## --------------------------------
+##     bigram       freq   speaker 
+## --------------- ------ ---------
+##    bad guys       1       PAM   
 ## 
-##    ingrown hairs      1       PAM   
+##   taps grunts     1       PAM   
 ## 
-##    cyril bailed       1       PAM   
+## hangin grimace    1       PAM   
 ## 
-##     tits whaaat       2       PAM   
+## liquor dressing   1       PAM   
 ## 
-##   holy dickballs      1       PAM   
-## ------------------------------------
+## pink panther's    1       PAM   
+## --------------------------------
 ```
 
 ```r
@@ -122,13 +122,13 @@ pandoc.table(sample_n(pam_bigrams, 5), style = "simple")
 ```
 ## 
 ## 
-##      bigram       freq   speaker 
-## ---------------- ------ ---------
-##  isis intranet     1       PAM   
-##   bell bottoms     1       PAM   
-## hollywood honcho   1       PAM   
-##    head smash      1       PAM   
-##     hey edie       1       PAM
+##       bigram        freq   speaker 
+## ------------------ ------ ---------
+## stockholm syndrome   1       PAM   
+##     40 minutes       1       PAM   
+##      buy lana        1       PAM   
+## breakfast clubber    1       PAM   
+##      huh date        1       PAM
 ```
 
 
@@ -140,19 +140,19 @@ pandoc.table(sample_n(pam_bigrams, 5), style = "grid")
 ```
 ## 
 ## 
-## +-----------------+--------+-----------+
-## |     bigram      |  freq  |  speaker  |
-## +=================+========+===========+
-## | grain alcohol's |   1    |    PAM    |
-## +-----------------+--------+-----------+
-## |    o.s cyril    |   1    |    PAM    |
-## +-----------------+--------+-----------+
-## |    car horn     |   1    |    PAM    |
-## +-----------------+--------+-----------+
-## |  lana's pissed  |   1    |    PAM    |
-## +-----------------+--------+-----------+
-## |    neck nuts    |   1    |    PAM    |
-## +-----------------+--------+-----------+
+## +------------------+--------+-----------+
+## |      bigram      |  freq  |  speaker  |
+## +==================+========+===========+
+## | backseat drivers |   1    |    PAM    |
+## +------------------+--------+-----------+
+## |    bear claw     |   2    |    PAM    |
+## +------------------+--------+-----------+
+## | throwing frickin |   1    |    PAM    |
+## +------------------+--------+-----------+
+## |    gonna stay    |   1    |    PAM    |
+## +------------------+--------+-----------+
+## |    eye idiot     |   1    |    PAM    |
+## +------------------+--------+-----------+
 ```
 
 
@@ -164,13 +164,13 @@ pandoc.table(sample_n(pam_bigrams, 5), style = "rmarkdown")
 ```
 ## 
 ## 
-## |     bigram      |  freq  |  speaker  |
-## |:---------------:|:------:|:---------:|
-## |    black eye    |   1    |    PAM    |
-## |  sobbing holy   |   1    |    PAM    |
-## | rural wisconsin |   1    |    PAM    |
-## |   baby seamus   |   2    |    PAM    |
-## |    low blood    |   1    |    PAM    |
+## |     bigram     |  freq  |  speaker  |
+## |:--------------:|:------:|:---------:|
+## |   mama bird    |   2    |    PAM    |
+## | swedish accent |   1    |    PAM    |
+## |  sploosh beep  |   1    |    PAM    |
+## |  people fill   |   1    |    PAM    |
+## |   gonna drop   |   1    |    PAM    |
 ```
 
 There are a bunch of other options you can play around with as well, such as [captions](https://rapporter.github.io/pander/#caption), [cell highlighting](https://rapporter.github.io/pander/#highlight-cells), [cell alignment](https://rapporter.github.io/pander/#cell-alignment), and [width](https://rapporter.github.io/pander/#table-and-cell-width).
@@ -187,24 +187,24 @@ print(xpam, type="html")
 ```
 
 <!-- html table generated in R 3.4.0 by xtable 1.8-2 package -->
-<!-- Sun May  7 09:40:59 2017 -->
+<!-- Sun May  7 09:48:10 2017 -->
 <table border=1>
 <tr> <th>  </th> <th> bigram </th> <th> freq </th> <th> speaker </th>  </tr>
-  <tr> <td align="right"> 1 </td> <td> sharknoid 3 </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 2 </td> <td> start enjoying </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 3 </td> <td> rosemary mint </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 4 </td> <td> step ahead </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 5 </td> <td> brown mica </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 6 </td> <td> shit's sake </td> <td align="right">   2 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 7 </td> <td> switchblade tracheotomygivin </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 8 </td> <td> puddin ooh </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 9 </td> <td> jack dick </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 10 </td> <td> that're strictly </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 11 </td> <td> heart beating </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 12 </td> <td> fawty shawty </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 13 </td> <td> zitto testa </td> <td align="right">   1 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 14 </td> <td> wee baby </td> <td align="right">   2 </td> <td> PAM </td> </tr>
-  <tr> <td align="right"> 15 </td> <td> date dates </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 1 </td> <td> real life </td> <td align="right">   3 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 2 </td> <td> mighta grabbed </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 3 </td> <td> chuckling fluid </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 4 </td> <td> cows bees </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 5 </td> <td> hoh lee </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 6 </td> <td> pammy pam's </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 7 </td> <td> name's furlock </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 8 </td> <td> vampire lovers </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 9 </td> <td> yeah gilda </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 10 </td> <td> evil nazi </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 11 </td> <td> potato eaters </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 12 </td> <td> ew kill </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 13 </td> <td> pam's buying </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 14 </td> <td> urinal cakes </td> <td align="right">   1 </td> <td> PAM </td> </tr>
+  <tr> <td align="right"> 15 </td> <td> pam's lucky </td> <td align="right">   1 </td> <td> PAM </td> </tr>
    </table>
 
 Yeah, so, the default doesn't look so awesome right now. However, this is really just an HTML table, so it can be easily styled as such (in addition to using the `xtable` parameters).
@@ -229,77 +229,77 @@ hpam
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">speaker</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">entire submarine</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">dawn happen</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">steering wheel's</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">job tomorrow</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">owww jesus</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">actual piracy</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">name's jermaaaine</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">green russians</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">ten people</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">ahem wildly</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">gun gimme</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">innocent migrant</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">sour milk</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">buyer lined</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">hoh lee</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">fence post</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">ha ha</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">6</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">equal shares</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">dammit dude</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">baby seamus</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">2</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
+</tr>
+<tr>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">eat lunch</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">breakup uh</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">yeah pillbo</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">hip ahem</td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">hai hai</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">2</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
 <tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">kill decepticon</td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">pure ethanol</td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">princess hang</td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
-</tr>
-<tr>
-  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">consenting adult</td>
+  <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">low flow</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">1</td>
   <td  style="vertical-align: top; text-align: left; white-space: nowrap; border-width:0px 0px 0px 0px; border-style: solid; border-top-color: NA;  border-right-color: NA;  border-bottom-color: NA;  border-left-color: NA; padding: 4pt 4pt 4pt 4pt; ">PAM</td>
 </tr>
@@ -322,23 +322,23 @@ kable(sample_n(pam_bigrams, 15), caption = "printr pamgrams")
 
 Table: printr pamgrams
 
-bigram               freq  speaker 
-------------------  -----  --------
-hypnotized people       1  PAM     
-fricking head's         1  PAM     
-worst idea              1  PAM     
-dip nuts                1  PAM     
-mm kay                  1  PAM     
-ow hey                  1  PAM     
-whitey's bullshit       1  PAM     
-feel sexy               1  PAM     
-frickin zod             1  PAM     
-kidnapper's neck        1  PAM     
-kill key                1  PAM     
-lot huh                 1  PAM     
-scrote licks            1  PAM     
-follow kenny            1  PAM     
-cold pony               1  PAM     
+bigram                  freq  speaker 
+---------------------  -----  --------
+aw maaan                   1  PAM     
+ms archer                  8  PAM     
+hypnotized people          1  PAM     
+damn indulgence            1  PAM     
+basically pure             1  PAM     
+finally nailed             1  PAM     
+jillion pounds             1  PAM     
+backseat drivers           1  PAM     
+miss fire                  1  PAM     
+hollywood honcho           1  PAM     
+priced milf                1  PAM     
+beam releasing             1  PAM     
+uh wha                     1  PAM     
+car smogged                1  PAM     
+underground fighting       1  PAM     
 
 
 ```r
