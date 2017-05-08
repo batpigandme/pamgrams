@@ -110,6 +110,18 @@ kable(sample_n(pam_bigrams, 15), caption = "printr pamgrams")
 ```{r printr vignette}
 vignette(package = "printr")
 ```
+
+### `DT`
+
+[`DT`](http://rstudio.github.io/DT/), from RStudio, provides _"an R interface to the DataTables library."_ It's different from the other options discussed here, as it creates an [HTML widget](http://gallery.htmlwidgets.org/) in which it displays the data. This means that it can be interactive-- so, explore all the great Pam-ness, below.
+
+```{r dt}
+library(DT)
+datatable(pam_bigrams)
+```
+
+
+
 ---
 ```{r sessioninfo}
 sessionInfo()
