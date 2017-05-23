@@ -1,5 +1,5 @@
 ---
-title: "Pamgrans and Bipams"
+title: "Pamgrams and Bipams"
 author: "Mara Averick"
 date: "`r Sys.Date()`"
 output: 
@@ -120,6 +120,17 @@ library(DT)
 datatable(pam_bigrams)
 ```
 
+### `RJSplot`
+
+[`RJSplot`](http://rjsplot.net/) is new to me, but while perusing their [gallery](http://rjsplot.net/gallery) of some pretty cool interactive graphics, I happened upon their [data table](http://rjsplot.net/docs/DataTable/index.html) interface. Though this generates its own, separate `DataTable` page, it gives viewers the ability to download their data in several formats (as shown in the image of the generated DataTable page).
+
+```{r RJSplot}
+library(RJSplot)
+# Create a data table
+tables_rjs(pam_bigrams)
+```
+
+![](pamgram_rjsplot.png)
 
 
 ---
