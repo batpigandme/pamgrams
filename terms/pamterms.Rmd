@@ -1,0 +1,65 @@
+---
+title: "Holy Sh*tsnacks: Pam at her Pamiest"
+author: "Mara Averick"
+date: "7/13/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.path = 'fig/', dev = 'png', dpi = 100, fig.retina = 2, message = FALSE)
+```
+
+```{r load libs}
+library(tidyverse)
+library(magick)
+library(here)
+library(magrittr)
+library(ggthemes)
+library(extrafont)
+```
+
+```{r pam terms}
+pam_ll_terms <- read_csv(here("data", "pam_ll_terms.csv"))
+```
+
+
+```{r}
+p <- pam_ll_terms %>%
+  mutate(term = reorder(term, freq)) %>%
+  ggplot(aes(term, freq)) +
+  geom_bar(stat = "identity", aes(fill = adjLL)) +
+  ggtitle("Pam Poovey's Pamiest Terms") +
+  xlab(NULL) +
+  coord_flip() +
+  theme_tufte(base_family = "Arial", base_size = 13, ticks = FALSE) +
+  scale_y_continuous(expand=c(0,0)) +
+  theme(plot.title=element_text(size = 14, family = 'Baveuse-Regular'),
+        axis.text = element_text(size = 10, family = 'Consolas'),
+        axis.title.x = element_blank(),
+        legend.text = element_text(size = 6, family = 'Consolas'),
+        legend.title = element_text(size = 8, family = 'Consolas'))
+
+p + scale_fill_continuous("ll", low = "magenta", high = "skyblue")
+
+ggsave(filename = here("img", "pamiest.png"), width = 5, height = 4, dpi = 300)
+```
+
+```{r logo time}
+background <- image_read(here("img", "pamiest.png"))
+
+logo_raw <- image_read(here("img", "pam_waffle_toss.gif"))
+
+frames <- lapply(logo_raw, function(frame) {
+  image_composite(background, frame, offset = "+1024+700")
+})
+
+
+animation <- image_animate(image_join(frames))
+
+
+image_write(animation, here("img", "pamiest_waffle.gif"))
+```
+
+
+![](http://i.imgur.com/R5buk6O.gif)
+
