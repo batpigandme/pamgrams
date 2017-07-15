@@ -34,13 +34,13 @@ pam_ll_terms %>%
   xlab(NULL) +
   coord_flip() +
   theme_tufte(base_family = "Arial", base_size = 13, ticks = FALSE) +
-  scale_y_continuous(expand=c(0,0)) +
-  theme(plot.title=element_text(size = 14, family = 'Baveuse-Regular'),
-        axis.text = element_text(size = 10, family = 'Consolas'),
-        axis.title.x = element_blank(),
-        legend.text = element_text(size = 6, family = 'Consolas'),
-        legend.title = element_text(size = 8, family = 'Consolas'))
+  scale_y_continuous(expand = c(0,0)) +
+  theme(plot.title = element_text(size = 14, family = 'Baveuse-Regular'),
+        axis.text = element_text(size = 8, family = 'Consolas'),
+        axis.text.y = element_text(face = "bold"),
+        axis.title.x = element_blank())
 
+ggsave(filename = here("img", "pam_loglikelihood.png"), width = 5, height = 4, dpi = 300)
 ```
 
 
