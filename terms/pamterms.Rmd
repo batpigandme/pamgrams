@@ -25,7 +25,7 @@ pam_ll_terms <- read_csv(here("data", "pam_ll_terms.csv"))
 
 Fill to match character colors from [*_Beyond the Tip: a data-driven exploration of Archer_*](https://archervisualization.herokuapp.com/) using the adjusted log likelihood values. 
 
-```{r pamllterm test}
+```{r pam solid llterm}
 pam_ll_terms %>%
   mutate(term = reorder(term, adjLL)) %>%
   ggplot(aes(term, adjLL)) +
@@ -43,8 +43,26 @@ pam_ll_terms %>%
 ggsave(filename = here("img", "pam_loglikelihood.png"), width = 5, height = 4, dpi = 300)
 ```
 
+```{r pam ll waffle}
+background <- image_read(here("img", "pam_loglikelihood.png"))
 
-```{r}
+waffle_raw <- image_read(here("img", "pam_waffle_toss.gif"))
+
+frames <- lapply(waffle_raw, function(frame) {
+  image_composite(background, frame, offset = "+1000+700")
+})
+
+
+animation <- image_animate(image_join(frames))
+
+
+image_write(animation, here("img", "pam_ll_waffle.gif"))
+```
+
+
+![](http://i.imgur.com/S2jZZfu.gif)
+
+```{r plot pamterms}
 p <- pam_ll_terms %>%
   mutate(term = reorder(term, freq)) %>%
   ggplot(aes(term, freq)) +
@@ -53,12 +71,13 @@ p <- pam_ll_terms %>%
   xlab(NULL) +
   coord_flip() +
   theme_tufte(base_family = "Arial", base_size = 13, ticks = FALSE) +
-  scale_y_continuous(expand=c(0,0)) +
-  theme(plot.title = element_text(size = 14, family = 'Baveuse-Regular'),
-        axis.text = element_text(size = 10, family = 'Consolas'),
+  scale_y_continuous(expand = c(0,0)) +
+  theme(text = element_text(family = 'Consolas'),
+        plot.title = element_text(size = 14, family = 'Baveuse-Regular'),
+        axis.text = element_text(size = 10),
         axis.title.x = element_blank(),
-        legend.text = element_text(size = 6, family = 'Consolas'),
-        legend.title = element_text(size = 8, family = 'Consolas'))
+        legend.text = element_text(size = 6),
+        legend.title = element_text(size = 8))
 
 p + scale_fill_continuous("ll", low = "magenta", high = "skyblue")
 
@@ -68,9 +87,9 @@ ggsave(filename = here("img", "pamiest.png"), width = 5, height = 4, dpi = 300)
 ```{r logo time}
 background <- image_read(here("img", "pamiest.png"))
 
-logo_raw <- image_read(here("img", "pam_waffle_toss.gif"))
+waffle_raw <- image_read(here("img", "pam_waffle_toss.gif"))
 
-frames <- lapply(logo_raw, function(frame) {
+frames <- lapply(waffle_raw, function(frame) {
   image_composite(background, frame, offset = "+1024+700")
 })
 
