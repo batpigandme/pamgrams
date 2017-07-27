@@ -60,7 +60,7 @@ image_write(animation, here("img", "pam_ll_waffle.gif"))
 ```
 
 
-![](http://i.imgur.com/S2jZZfu.gif)
+![](http://i.imgur.com/tizT0se.gif)
 
 ```{r plot pamterms}
 p <- pam_ll_terms %>%
@@ -101,5 +101,5 @@ image_write(animation, here("img", "pamiest_waffle.gif"))
 ```
 
 
-![](http://i.imgur.com/R5buk6O.gif)
+![](http://i.imgur.com/h8kuq11.gif)
 
